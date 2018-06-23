@@ -18,7 +18,8 @@ app.use(express.static("public"));
 
 // Routes
 // =============================================================
-require("./controllers/api-controller.js")(app);
+require("./routes/cust-routes.js")(app);
+require("./routes/string-routes.js")(app);
 
 // Starting our Express app
 // =============================================================
