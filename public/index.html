@@ -2,209 +2,253 @@
 <html lang="en">
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
-  <title>Starter Template - Materialize</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+    <title>Starter Template - Materialize</title>
 
-  <!-- CSS  -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
-  <link href="materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
-  <link rel="stylesheet" href="css/style.css">
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
 </head>
 
 <body>
-  <nav>
-    <div class="nav-wrapper">
-      <form>
-        <a href="#!" class="brand-logo">Logo</a>
-        <ul class="right hide-on-med-and-down">
-          <li>
-            <a class="waves-effect waves-light btn">search customer</a>
-          </li>
-          <li>
-            <a class="waves-effect waves-light btn modal-trigger" href="#option1">Create Stringing</a>
-          </li>
-        </ul>
-      </form>
-    </div>
-  </nav>
-
-  <div class="section no-pad-bot" id="index-banner">
-    <div class="container">
-      <br>
-      <br>
-      <h1 class="header center orange-text">New Customer</h1>
-      <h4 class="center">Add new customer info to create a new string job.</h4>
-      <div class="row">
-        <form class="col s12">
-          <div class="row">
-            <div class="input-field col s3">
-              <i class="material-icons prefix">account_circle</i>
-              <input id="first_name" type="text" class="validate">
-              <label for="first_name">First Name</label>
-            </div>
-            <div class="input-field col s3">
-              <i class="material-icons prefix">account_circle</i>
-              <input id="last_name" type="text" class="validate">
-              <label for="last_name">Last Name</label>
-            </div>
-            <div class="input-field col s3">
-              <i class="material-icons prefix">phone</i>
-              <input id="phone_number" type="tel" class="validate">
-              <label for="phone_number">Telephone</label>
-            </div>
-            <br>
-            <a class="waves-effect waves-light btn" id="add-cust">add customer</a>
-          </div>
-        </form>
-      </div>
-      <br>
-      <br>
-
-    </div>
-  </div>
-
-  <div class="container" id="cust-search">
-    <div class="row">
-      <div class="col s12 m12">
-        <div class="input-field col s9 m9">
-          <i class="material-icons prefix">account_circle</i>
-          <input id="last_search" type="text" class="validate">
-          <label for="last_search">Last Name</label>
-        </div>
-        <br>
-        <a class="waves-effect waves-light btn" id="get-cust">search customer</a>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="container">
-    <div class="section">
-
-      <!--   Icon Section   -->
-      <div class="row">
-        <div class="col s12 m12">
-          <div class="icon-block center">
-
-            <table class="hidden" id="tbl-data">
-              <thead>
-                <tr>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Phone Number</th>
-                  <th>Add String Job</th>
-                  <th>View String Logs</th>
-                </tr>
-              </thead>
-
-              <tbody id="cust-tbl">
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="conatiner hidden" id="string-div">
-          <div class="row">
-            <form class="col s12">
-              <div class="row" id="string-input">
-                <div class="input-field col s6">
-                  <input id="string" type="text" class="validate">
-                  <label for="string">String</label>
-                </div>
-                <div class="input-field col s6">
-                  <input id="gauge" type="text" class="validate">
-                  <label for="gauge">Gauge</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="input-field col s6">
-                  <input id="tension" type="text" class="validate">
-                  <label for="tension">Tension</label>
-                </div>
-                <div class="input-field col s6">
-                  <input id="racquet" type="text" class="validate">
-                  <label for="racquet">Racquet</label>
-                </div>
-              </div>
-              <div class="row">
-                  <div class="input-field col s12">
-                    <textarea id="comment" class="materialize-textarea"></textarea>
-                    <label for="comment">Comments</label>
-                  </div>
-              </div>
-              <a class="waves-effect waves-light btn" id="create-job">add string job</a>
+    <nav>
+        <div class="nav-wrapper">
+            <form>
+                <a href="#!" class="brand-logo">Log</a>
+                <ul class="right hide-on-med-and-down">
+                    <li>
+                        <a class="waves-effect waves-light btn modal-trigger" id="op-cust-mod" data-target="cust-mod">Modal</a>
+                    </li>
+                    <li>
+                        <a class="waves-effect waves-light btn modal-trigger" href="#option1">Create Stringing</a>
+                    </li>
+                </ul>
             </form>
-          </div>
+        </div>
+    </nav>
+
+    <div id="cust-mod" class="modal">
+        <div class="nav-wrapper">
+            <a class="waves-effect waves-light btn modal-trigger" id="search-btn" data-target="#search-mod">Search Customer</a>
         </div>
 
-      </div>
-      <br>
-      <br>
+        <div class="modal-content">
+            <table id="cust-mod-table">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Phone Number</th>
+                        <th>Add String Job</th>
+                        <th>View String Logs</th>
+                    </tr>
+                </thead>
+
+                <tbody id="cust-mod-tb">
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+        </div>
     </div>
 
-    <footer class="page-footer orange">
-      <div class="container">
-        <div class="row">
-          <div class="col l6 s12">
-            <h5 class="white-text">Company Bio</h5>
-            <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help
-              support and continue development on this project and is greatly appreciated.</p>
+    <div class="modal" id="search-mod">
+        <div class="modal-content">
+            <div class="container" id="cust-search">
+                <div class="row">
+                    <div class="col s12 m12">
+                        <div class="input-field col s9 m9">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input id="last_search" type="text" class="validate">
+                            <label for="last_search">Last Name</label>
+                        </div>
+                        <br>
+                        <a class="waves-effect waves-light btn" id="get-cust">search customer</a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+            </div>
+        </div>
 
+    </div>
 
-          </div>
-          <div class="col l3 s12">
-            <h5 class="white-text">Settings</h5>
-            <ul>
-              <li>
-                <a class="white-text" href="#!">Link 1</a>
-              </li>
-              <li>
-                <a class="white-text" href="#!">Link 2</a>
-              </li>
-              <li>
-                <a class="white-text" href="#!">Link 3</a>
-              </li>
-              <li>
-                <a class="white-text" href="#!">Link 4</a>
-              </li>
-            </ul>
-          </div>
-          <div class="col l3 s12">
-            <h5 class="white-text">Connect</h5>
-            <ul>
-              <li>
-                <a class="white-text" href="#!">Link 1</a>
-              </li>
-              <li>
-                <a class="white-text" href="#!">Link 2</a>
-              </li>
-              <li>
-                <a class="white-text" href="#!">Link 3</a>
-              </li>
-              <li>
-                <a class="white-text" href="#!">Link 4</a>
-              </li>
-            </ul>
-          </div>
+    <div class="modal" id="job-create">
+        <div class="modal-content">
+            <div class="conatiner" id="string-div">
+                <div class="row">
+                    <form class="col s12">
+                        <div class="row" id="string-input">
+                            <div class="input-field col s6">
+                                <input id="string" type="text" class="validate">
+                                <label for="string">String</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="gauge" type="text" class="validate">
+                                <label for="gauge">Gauge</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="tension" type="text" class="validate">
+                                <label for="tension">Tension</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="racquet" type="text" class="validate">
+                                <label for="racquet">Racquet</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="comment" class="materialize-textarea"></textarea>
+                                <label for="comment">Comments</label>
+                            </div>
+                        </div>
+                        <a class="waves-effect waves-light btn" id="create-job">add string job</a>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="modal" id="view-log">
+        <div class="modal-content">
+            <div class="container">
+                <div class="section">
+                    <div class="row">
+                        <div class="col s12 m12">
+                            <div class="icon-block center">
+                                <table id="string-data">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>String</th>
+                                            <th>Gauge</th>
+                                            <th>Tension</th>
+                                            <th>Racquet</th>
+                                            <th>Comments</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="string-tbl">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+                </div>
+            </div>
         </div>
       </div>
-      <div class="footer-copyright">
-        <div class="container">
-          Made by
-          <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+
+        <div class="section no-pad-bot" id="index-banner">
+            <div class="container">
+                <br>
+                <br>
+                <h1 class="header center orange-text">New Customer</h1>
+                <h4 class="center">Add new customer info to create a new string job.</h4>
+                <div class="row">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s3">
+                                <i class="material-icons prefix">account_circle</i>
+                                <input id="first_name" type="text" class="validate">
+                                <label for="first_name">First Name</label>
+                            </div>
+                            <div class="input-field col s3">
+                                <i class="material-icons prefix">account_circle</i>
+                                <input id="last_name" type="text" class="validate">
+                                <label for="last_name">Last Name</label>
+                            </div>
+                            <div class="input-field col s3">
+                                <i class="material-icons prefix">phone</i>
+                                <input id="phone_number" type="tel" class="validate">
+                                <label for="phone_number">Telephone</label>
+                            </div>
+                            <br>
+                            <a class="waves-effect waves-light btn" id="add-cust">add customer</a>
+                        </div>
+                    </form>
+                </div>
+                <br>
+                <br>
+
+            </div>
         </div>
-      </div>
-    </footer>
 
+        <footer class="page-footer orange">
+            <div class="container">
+                <div class="row">
+                    <div class="col l6 s12">
+                        <h5 class="white-text">Company Bio</h5>
+                        <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
 
-    <!--  Scripts-->
-    
-    <script src="materialize/js/materialize.js"></script>
-    <script src="materialize/js/init.js"></script>
-    <script src="js/client.js"></script>
+                    </div>
+                    <div class="col l3 s12">
+                        <h5 class="white-text">Settings</h5>
+                        <ul>
+                            <li>
+                                <a class="white-text" href="#!">Link 1</a>
+                            </li>
+                            <li>
+                                <a class="white-text" href="#!">Link 2</a>
+                            </li>
+                            <li>
+                                <a class="white-text" href="#!">Link 3</a>
+                            </li>
+                            <li>
+                                <a class="white-text" href="#!">Link 4</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col l3 s12">
+                        <h5 class="white-text">Connect</h5>
+                        <ul>
+                            <li>
+                                <a class="white-text" href="#!">Link 1</a>
+                            </li>
+                            <li>
+                                <a class="white-text" href="#!">Link 2</a>
+                            </li>
+                            <li>
+                                <a class="white-text" href="#!">Link 3</a>
+                            </li>
+                            <li>
+                                <a class="white-text" href="#!">Link 4</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <div class="container">
+                    Made by
+                    <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+                </div>
+            </div>
+        </footer>
+
+        <!--  Scripts-->
+
+        <script src="materialize/js/materialize.js"></script>
+        <script src="materialize/js/init.js"></script>
+        <script src="js/client.js"></script>
 
 </body>
 

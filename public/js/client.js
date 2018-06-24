@@ -1,108 +1,175 @@
-$(document).on('click', '#add-cust', () =>  {
-    newCustomer = {
-        last: $("#last_name").val(),
-        first: $("#first_name").val(),
-        phone: $("#phone_number").val()
-    }
+//Take result from get response and print table data into modal
+function printSearch(result)  {
+    result.forEach((data) => {
+        console.log(data);
+        let first = $("<td>").text(data.first);
+        let last = $("<td>").text(data.last);
+        let phone = $("<td>").text(data.phone);
+      
+        let buttonCreate = $("<button>").addClass("job-btn material-icons").text("add_to_queue").val(data.id);
+        let order = $("<td>").append(buttonCreate);
+        
+        let buttonView = $("<button>").addClass("view-btn material-icons").text("history").val(data.id);
+        let viewLog = $("<td>").append(buttonView)
+    
+        let row = $("<tr>").append(first,last,phone, order, viewLog);
+        $("#cust-mod-tb").append(row)
+        $("#cust-mod").modal('open');
+        
+    })
+}
 
-    console.log(newCustomer);
-
-    $.post("/api/customers", newCustomer);
-})
-
-
-$(document).on('click', '#get-cust', () =>  {
-    let customer = $("#cust-tbl")
-    $("#cust-search").addClass("hidden");
-    $("#tbl-data").removeClass("hidden");
+function printLog(result)  {
+    console.log(result)
+    result.forEach((data) =>  {
+        let string = $("<td>").text(data.string);
+        let gauge = $("<td>").text(data.gauge);
+        let tension = $("<td>").text(data.tension);
+        let racquet = $("<td>").text(data.racquet);
+        let comment = $("<td>")
+        if(data.comment.length === 0)  {
+            comment.text(" ")
+        } else  {
+            comment.text(data.comment);
+        }
+        let convert = moment(data.createdAt).add(1, 'day').format('L');
+        let date = $("<td>").text(convert)
+        let row = $("<tr>")
+        row.append(date, string, gauge, tension, racquet, comment);
+        $("#string-tbl").append(row);
+        $("#view-log").modal('open');
+    })
     
 
-    $.get("/api/customers/" + $("#last_search").val()).then((result) =>  {
-        console.log(result);
-        result.forEach((data) => {
-            console.log(data.first);
-            let first = $("<td>").text(data.first);
-            let last = $("<td>").text(data.last);
-            let phone = $("<td>").text(data.phone);
-            
-            let iconCreate = $("<i>").text("create");
-            iconCreate.addClass("material-icons");
-            
-            let buttonCreate = $("<button>").addClass("job-btn");
-            buttonCreate.val(data.id);
-            buttonCreate.append(iconCreate);
-
-            let order = $("<td>");
-            order.append(buttonCreate);
-
-            let iconView = $("<i>").text("create")
-            iconView.addClass("material-icons");
-
-            let buttonView = $("<button>").addClass("view-btn")
-            buttonView.val(data.id)
-            buttonView.append(iconView);
-
-            let viewLog = $("<td>").append(buttonView)
+}
+// Add customer POST then GET customer options
+function addCustomer()  {
+    newCustomer = {
+        last: $("#last_name").val().toUpperCase(),
+        first: $("#first_name").val().toUpperCase(),
+        phone: $("#phone_number").val()
+    }
+// POST newCustomer
+    $.post("/api/customers", newCustomer).then((result) =>  {
+        //Search for new customer to trigger customer option modal
+        $.get(`/api/customers/${result.last}`).then(printSearch)
+    });
+}
+//GET customer from search value 
+function searchCustomer()  {
+    $("#cust-mod-tb").empty();
+    $("#search-mod").modal('close');
         
-            
-            let row = $("<tr>")
-            row.append(first,last,phone, order, viewLog);
-            customer.append(row);
-        })
+    let search = $("#last_search").val().toUpperCase();
+    $.get(`/api/customers/${search}`).then((result) =>  {
+        //Validate user input, if none exist return to index
+        if(result.length <= 0 || result === null)  {
+            swal({
+                icon: "warning",
+                text: "No customer found"
+            }).then(() =>  {
+                $("#last_search").val("")
+                $("#search-mod").modal('open');
+            })
+        } else  {
+            //Print search response and prompt customer options
+            printSearch(result);
+        }
     })
-})
+}
+//GET all customers in the database
+function getCustomers()  {
+    $("#cust-mod-tb").empty();
+    $.get("/api/customers").then(printSearch);
+}
+//GET Customer String Log
+function viewLogs()  {
+    $("#string-tbl").empty();
+    $("#cust-mod").modal('close');
+    
+     let customer = $(this).val();
+     console.log(`Customer: ${customer}`)
+     $.get("/api/string/" + customer).then(printLog);
+}
 
-$(document).on('click', ".job-btn", function()  {
+// console.log(data);
+
+
+function jobCreate()  {
+    $("#cust-mod").modal('close');
     let customer = $(this).val();
     let customerId = $("<div>")
     customerId.addClass("hidden")
         .attr('id', 'customerId')
         .val(customer)
     $("#string-input").append(customerId);
+    $("#job-create").modal('open');
 
-    console.log($("#customerId").val())
-    
-    $("#cust-tbl").empty();
-    $("#tbl-data").addClass("hidden");
-    $("#last_search").val("")
-    $("#cust-search").removeClass("hidden");
-    
-})
+}
 
-$(document).on('click', '#create-job', function()  {
+function getJob()  {
         
-    console.log("Button Working")
-    
-        let newString = {
-            string: $("#string").val(),
-            gauge: $("#gauge").val(),
-            tension: $("#tension").val(),
-            racquet: $("#racquet").val(),
-            comment: $("#comment").val(),
-            customerId: $("#customerId").val(),
-        }
-        $.post("/api/string", newString).then(() =>  {
-            swal({
-                text: "Job Created",
-                icon: 'http://www.coachcowie.com/wp-content/uploads/2017/03/Restringing.jpg',
-                button: "Job Created"
-            })
-        });
-        $("#string").val("")
-        $("#gauge").val("")
-        $("#tension").val("")
-        $("#racquet").val("")
-        $("#comment").val("")
-})
-
-$(document).on('click', '.view-btn', function()  {
-   
-    let customer = $(this).val();
-    console.log(customer);
+    let newString = {
+        string: $("#string").val(),
+        gauge: $("#gauge").val(),
+        tension: $("#tension").val(),
+        racquet: $("#racquet").val(),
+        comment: $("#comment").val(),
+        customerId: $("#customerId").val(),
+    }
+    $.post("/api/string", newString).then(() =>  {
+        swal({
+            text: "Job Added to Queue",
+            icon: 'success',
+            button: "Close"
+        })
+    });
+    $("#string").val("")
+    $("#gauge").val("")
+    $("#tension").val("")
+    $("#racquet").val("")
+    $("#comment").val("")
+}
 
 
-    $.get("/api/string/" + customer).then((result) => {
-        console.log(result);
+//Button Triggers
+$(document).ready(() =>  {
+    //Initialize modals
+    $(".modal").modal()
+    //Add Customer 
+    $(document).on('click', '#add-cust', addCustomer);
+    //Search Customer
+    $(document).on('click', '#get-cust', searchCustomer);
+    //GET Customers
+    $(document).on('click', '#op-cust-mod', getCustomers);
+    //GET and print customer string logs
+    $(document).on('click', '.view-btn', viewLogs);
+    //Open string job modal
+    $(document).on('click', ".job-btn", jobCreate);
+    //POST for job 
+    $(document).on('click', '#create-job', getJob)
+    //GET customer string log
+    $(document).on('click', '#search-btn', () =>  {
+        $("#cust-mod").modal('close');
+        $("#search-mod").modal('open');
     })
+    
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

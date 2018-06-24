@@ -1,15 +1,18 @@
 var db = require("../models");
 
 module.exports = function(app) {
-  // app.get("/api/customers", function(req, res) {
-  //   db.customers.findAll({}).then(function(dbCustomer) {
-  //     res.json(dbCustomer);
-  //   });
-  // });
+  app.get("/api/customers", function(req, res) {
+    db.customers.findAll({
+      include: [db.StringLog]
+    }).then(function(dbCustomer) {
+      res.json(dbCustomer);
+    });
+  });
 
   app.get("/api/customers/:last", function(req,res)  {
     console.log(req.body);
     db.customers.findAll({
+      include: [db.StringLog],
       where: {
         last: req.params.last
       }
