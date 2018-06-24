@@ -4,7 +4,11 @@ module.exports = function(sequelize, DataTypes) {
       gauge: DataTypes.INTEGER,
       tension: DataTypes.INTEGER,
       racquet: DataTypes.STRING,
-      comment: DataTypes.TEXT
+      comment: DataTypes.TEXT,
+      isDone: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+      }
     
     });
 

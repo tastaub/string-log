@@ -132,6 +132,20 @@ function getJob()  {
 }
 
 
+
+function jobLog()  {
+    $.get('/api/customers').then((result) =>  {
+        result.forEach((customers) =>  {
+            customers.StringLogs.forEach((jobs)  =>  {
+                if(jobs.isDone === false)  {
+                    console.log(`${customers.first} ${customers.last} ${customers.phone} ${jobs.string} ${jobs.tension} ${jobs.gauge} ${jobs.racquet}`)
+                }
+            })
+        })
+    })
+}
+
+
 //Button Triggers
 $(document).ready(() =>  {
     //Initialize modals
@@ -153,6 +167,7 @@ $(document).ready(() =>  {
         $("#cust-mod").modal('close');
         $("#search-mod").modal('open');
     })
+    $(document).on('click', '#job-logs', jobLog)
     
 })
 
