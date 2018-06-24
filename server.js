@@ -20,7 +20,7 @@ app.use(express.static("public"));
 // =============================================================
 require("./routes/cust-routes.js")(app);
 require("./routes/string-routes.js")(app);
-
+require("./routes/html-routes.js")(app);
 // Starting our Express app
 // =============================================================
 db.sequelize.sync().then(function() {
