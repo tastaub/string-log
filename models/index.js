@@ -9,7 +9,7 @@ var config    = require(__dirname + '/../config/config.json')[env];
 var db        = {};
 
 if (process.env.JAWSDB_URL) {
-  var sequelize = new Sequelize("mysql://l3e4co5gdg9hjc4d:xocdqaazx5a4izvj@q57yawiwmnaw13d2.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/yfr7d728pugnocrq");
+  var sequelize = new Sequelize(config.url);
 } else {
   var sequelize = new Sequelize(config.database, config.username, config.password, config);
 }

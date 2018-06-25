@@ -139,6 +139,17 @@ function jobLog()  {
             customers.StringLogs.forEach((jobs)  =>  {
                 if(jobs.isDone === false)  {
                     console.log(`${customers.first} ${customers.last} ${customers.phone} ${jobs.string} ${jobs.tension} ${jobs.gauge} ${jobs.racquet}`)
+                    let first = $("<td>").text(customers.first)
+                    let last = $("<td>").text(customers.last)
+                    let phone = $("<td>").text(customers.phone)
+                    let string = $("<td>").text(jobs.string)
+                    let gauge = $("<td>").text(jobs.gauge)
+                    let tension = $("<td>").text(jobs.tension)
+                    let racquet = $("<td>").text(jobs.racquet)
+                    let comment = $("<td>").text(jobs.comment)
+                    let row = $("<tr>").append(first,last,phone,string,gauge,tension,racquet,comment)
+                    $("#job-queue").append(row);
+                    $("#queue-mod").modal('open');
                 }
             })
         })
