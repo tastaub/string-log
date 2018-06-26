@@ -35,7 +35,7 @@
 
     <div id="cust-mod" class="modal">
         <div class="nav-wrapper">
-            <a class="waves-effect waves-light btn modal-trigger" id="search-btn" data-target="#search-mod">Search Customer</a>
+           <a class="waves-effect waves-light btn modal-trigger" id="unique-search">Search Customer</a>
         </div>
 
         <div class="modal-content">
@@ -59,7 +59,7 @@
         </div>
     </div>
 
-    <div class="modal" id="search-mod">
+    <!-- <div class="modal" id="search-mod">
         <div class="modal-content">
             <div class="container" id="cust-search">
                 <div class="row">
@@ -79,7 +79,7 @@
             </div>
         </div>
 
-    </div>
+    </div> -->
 
     <div class="modal" id="job-create">
         <div class="modal-content">
@@ -159,25 +159,28 @@
       
       <div class="modal" id="queue-mod">
         <div class="modal-content">
+          <nav>
+            <div class="nav-wrapper">
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+            </div>
+          </nav>
 
+          <div id="queue-tbl">
           <table id="string-data">
             <thead>
               <tr>
-                <th>First</th>
-                <th>Last</th>
-                <th>Phone</th>
+                <th>Customer</th>
                 <th>String</th>
-                <th>Gauge</th>
-                <th>Tension</th>
-                <th>Racquet</th>
+                <th>Info</th>
                 <th>Comment</th>
+                <th>Complete</th>
               </tr>
             </thead>
             <tbody id="job-queue">
 
             </tbody>
           </table>
-
+          </div>
 
         </div>
         <div class="modal-footer">
@@ -222,57 +225,6 @@
             </div>
         </div>
 
-        <footer class="page-footer orange">
-            <div class="container">
-                <div class="row">
-                    <div class="col l6 s12">
-                        <h5 class="white-text">Company Bio</h5>
-                        <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
-
-                    </div>
-                    <div class="col l3 s12">
-                        <h5 class="white-text">Settings</h5>
-                        <ul>
-                            <li>
-                                <a class="white-text" href="#!">Link 1</a>
-                            </li>
-                            <li>
-                                <a class="white-text" href="#!">Link 2</a>
-                            </li>
-                            <li>
-                                <a class="white-text" href="#!">Link 3</a>
-                            </li>
-                            <li>
-                                <a class="white-text" href="#!">Link 4</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col l3 s12">
-                        <h5 class="white-text">Connect</h5>
-                        <ul>
-                            <li>
-                                <a class="white-text" href="#!">Link 1</a>
-                            </li>
-                            <li>
-                                <a class="white-text" href="#!">Link 2</a>
-                            </li>
-                            <li>
-                                <a class="white-text" href="#!">Link 3</a>
-                            </li>
-                            <li>
-                                <a class="white-text" href="#!">Link 4</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-copyright">
-                <div class="container">
-                    Made by
-                    <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
-                </div>
-            </div>
-        </footer>
 
         <!--  Scripts-->
 

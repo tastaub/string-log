@@ -5,6 +5,7 @@ module.exports = function(app) {
     db.customers.findAll({
       include: [db.StringLog]
     }).then(function(dbCustomer) {
+      console.log(dbCustomer);
       res.json(dbCustomer);
     });
   });
@@ -20,6 +21,17 @@ module.exports = function(app) {
       res.json(result);
     })
   })
+
+  // app.get('/api/customers/complete', (req,res) =>  {
+  //   db.customers.findAll({
+  //     include: [db.StringLog],
+  //     where: {
+  //       isDone: false 
+  //     }
+  //   }).then((result) =>  {
+  //     res.json(result)
+  //   })
+  // })
 
   app.post("/api/customers", function(req, res) {
     db.customers.create(req.body).then(function(dbCustomer) {
