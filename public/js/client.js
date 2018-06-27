@@ -1,14 +1,80 @@
-//Take result from get response and print table data into modal
+//==============================
+//===Button Trigger Functions===
+//==============================
+
+// ** Add Customer Progression **
+
+//Add Customer from main screen
+function addCustomer() {
+    let phone = $("#phone_number").val();
+    //Check length to make sure input is a phone number
+    if(phone.length === 10)  {
+        //Get input values from index.html
+        newCustomer = {
+            last: $("#last_name").val().toUpperCase(),
+            first: $("#first_name").val().toUpperCase(),
+            phone: phone
+        }
+        // POST newCustomer
+        $.post("/api/customers", newCustomer).then((result) => {
+            //Search for new customer to trigger customer option modal
+            searchCustomer(result.last)
+        });
+    } else  {
+        swal({
+            icon: 'warning',
+            text: `${phone} is not a valid phone number.`
+        })
+        $("#phone_number").val("")
+    }
+    
+
+}
+
+function searchCustomer(value) {
+    //Empty table data before 
+    
+    let search = value.toUpperCase();
+    $.get(`/api/customers/${search}`).then((result) => {
+        //Validate user input, if none exist return to customer modal
+        if (result.length <= 0 || result === null) {
+            swal({
+                icon: "warning",
+                text: "No customer found"
+            }).then(() => {
+                //Reopen cust-mod
+                $("#cust-mod").modal('open')
+            })
+        } else {
+            $("#cust-mod-tb").empty();
+            //Print search response and prompt customer options
+            printSearch(result);
+        }
+    })
+}
+
+// ** Get Customer Progression
+
+//GET all customers in the database
+function getCustomers() {
+    $("#cust-mod-tb").empty();
+    $.get("/api/customers").then(printSearch);
+}
+
+
 function printSearch(result) {
     result.forEach((data) => {
         console.log(data);
+        //Print user name, table data has 3 columns
         let first = $("<td>").text(data.first);
         let last = $("<td>").text(data.last);
         let phone = $("<td>").text(data.phone);
 
+        //Create button trigger to create new job **class job-btn**
         let buttonCreate = $("<button>").addClass("job-btn material-icons").text("add_to_queue").val(data.id);
         let order = $("<td>").append(buttonCreate);
 
+        //Create button trigger view of customer (by id) job logs **class view-btn**
         let buttonView = $("<button>").addClass("view-btn material-icons").text("history").val(data.id);
         let viewLog = $("<td>").append(buttonView)
 
@@ -20,66 +86,34 @@ function printSearch(result) {
 }
 
 function printLog(result) {
-    console.log(result)
     result.forEach((data) => {
-        let string = $("<td>").text(data.string);
-        let gauge = $("<td>").text(data.gauge);
-        let tension = $("<td>").text(data.tension);
+        //Print Customer Logs **Column length 4
+        let string = $("<td>").text(`${data.string} ${data.gauge}: ${data.tension}`);
         let racquet = $("<td>").text(data.racquet);
+        
         let comment = $("<td>")
+        //Check if comment exists, if yes add button to view comment
         if (data.comment.length === 0) {
             comment.text(" ")
         } else {
             comment.text(data.comment);
         }
+        //Convert date data to MMDDYYYY
         let convert = moment(data.createdAt).add(1, 'day').format('L');
         let date = $("<td>").text(convert)
         let row = $("<tr>")
-        row.append(date, string, gauge, tension, racquet, comment);
+        row.append(date, string, racquet, comment);
+        
+        //Selectors to populate customer string log table
         $("#string-tbl").append(row);
         $("#view-log").modal('open');
     })
 
 
 }
-// Add customer POST then GET customer options
-function addCustomer() {
-    newCustomer = {
-        last: $("#last_name").val().toUpperCase(),
-        first: $("#first_name").val().toUpperCase(),
-        phone: $("#phone_number").val()
-    }
-    // POST newCustomer
-    $.post("/api/customers", newCustomer).then((result) => {
-        //Search for new customer to trigger customer option modal
-        $.get(`/api/customers/${result.last}`).then(printSearch)
-    });
-}
-//GET customer from search value 
-function searchCustomer(value) {
-    $("#cust-mod-tb").empty();
-    let search = value.toUpperCase();
-    $.get(`/api/customers/${search}`).then((result) => {
-        //Validate user input, if none exist return to index
-        if (result.length <= 0 || result === null) {
-            swal({
-                icon: "warning",
-                text: "No customer found"
-            }).then(() => {
-                $("#cust-mod").modal('open')
-            })
-        } else {
-            //Print search response and prompt customer options
 
-            printSearch(result);
-        }
-    })
-}
-//GET all customers in the database
-function getCustomers() {
-    $("#cust-mod-tb").empty();
-    $.get("/api/customers").then(printSearch);
-}
+
+
 //GET Customer String Log
 function viewLogs() {
     $("#string-tbl").empty();
@@ -90,7 +124,6 @@ function viewLogs() {
     $.get("/api/string/" + customer).then(printLog);
 }
 
-// console.log(data);
 
 
 function jobCreate() {

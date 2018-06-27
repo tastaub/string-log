@@ -1,11 +1,15 @@
 const db = require("../models");
 
 module.exports = (app) =>  {
+    
+    //Create new job
     app.post("/api/string", function(req, res) {
-        db.StringLog.create(req.body).then(function(dbPost) {
-          res.json(dbPost);
+        db.StringLog.create(req.body).then(function(response) {
+            res.json(response);
         });
       });
+    
+
 
     app.get("/api/string", function(req,res)  {
         db.StringLog.findAll({
@@ -29,16 +33,6 @@ module.exports = (app) =>  {
         })
     })
 
-    app.get("/api/string/complete", function(req,res)  {
-        db.StringLog.findAll({
-            include: [db.customers],
-            where: {
-                isDone: true
-            }
-        }).then((result) =>  {
-            res.json(result);
-        })
-    })
 
     app.put("/api/string/:id", function(req,res)  {
         db.StringLog.update({isDone: true}, {where: {id: req.params.id}}).then((result) =>  {

@@ -22,16 +22,6 @@ module.exports = function(app) {
     })
   })
 
-  // app.get('/api/customers/complete', (req,res) =>  {
-  //   db.customers.findAll({
-  //     include: [db.StringLog],
-  //     where: {
-  //       isDone: false 
-  //     }
-  //   }).then((result) =>  {
-  //     res.json(result)
-  //   })
-  // })
 
   app.post("/api/customers", function(req, res) {
     db.customers.create(req.body).then(function(dbCustomer) {
