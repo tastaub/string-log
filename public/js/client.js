@@ -208,23 +208,33 @@ function printJobs(result)  {
    })
 }
 
+function setAuto()  {
+    $.get("/api/customers").then((results) =>  {
+        results.forEach((choices) => {
+            let searchLast = choices.last;
+            
+            let options = $("<option>").val(searchLast);
+
+            $("#last-data").append(options);
+        })
+    })
+}
+
 
 
 //Button Triggers
 $(document).ready(() => {
+    setAuto();
     //Initialize modals
     $(".modal").modal()
     //Add Customer 
     $(document).on('click', '#add-cust', addCustomer);
     //Search Customer
     $(document).on('click', '#unique-search', () => {
-        $("cust-mod-tb").empty();
+        $("#cust-mod-tb").empty();
         $("#cust-mod").modal('close');
-        swal({
-            text: "Search Customer",
-            content: "input",
-            button: "Search"
-        }).then(searchCustomer);
+        $("#search-mod").modal('open')
+       
     });
     //GET Customers
     $(document).on('click', '#op-cust-mod', getCustomers);
