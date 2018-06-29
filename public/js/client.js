@@ -5,29 +5,39 @@
 // ** Add Customer Progression **
 
 //Add Customer from main screen
-function addCustomer() {
-    let phone = $("#phone_number").val();
-    //Check length to make sure input is a phone number
-    if(phone.length === 10)  {
-        //Get input values from index.html
-        newCustomer = {
-            last: $("#last_name").val().toUpperCase(),
-            first: $("#first_name").val().toUpperCase(),
-            phone: phone
-        }
+function getCustVal()  {
+    let newCustomer = {
+        first: $("#first_name").val(),
+        last: $("#last_name").val(),
+        phone: $("#phone_number").val()
+    }
+
+    nameValidate(newCustomer);
+}
+
+function nameValidate(cust)  {
+    clearInputs();
+    if(cust.first.length && cust.last.length > 0 && cust.phone.length === 10)  {
+        console.log("Correct")
+        addCustomer(cust)
+    } else  {
+        console.log("Loser");
+        swal({
+            icon: 'warning',
+            title: 'Invalid Input',
+            text: 'Please enter all fields and a valid phone number'
+        })
+    }
+}
+
+
+function addCustomer(cust) {
+
         // POST newCustomer
-        $.post("/api/customers", newCustomer).then((result) => {
+        $.post("/api/customers", cust).then((result) => {
             //Search for new customer to trigger customer option modal
             searchCustomer(result.last)
         });
-    } else  {
-        swal({
-            icon: 'warning',
-            text: `${phone} is not a valid phone number.`
-        })
-        $("#phone_number").val("")
-    }
-    
 
 }
 
@@ -61,8 +71,28 @@ function getCustomers() {
     $.get("/api/customers").then(printSearch);
 }
 
+function uniqueSearch()  {
+    $("#last-search").empty();
+    $("#search-mod").modal('close');
+    let search = $("#last-search").val();
+    
+    searchCustomer(search);
+    
+
+}
+
+function viewLogs() {
+    $("#string-tbl").empty();
+    $("#cust-mod").modal('close');
+
+    let customer = $(this).val();
+    console.log(`Customer: ${customer}`)
+    $.get("/api/string/" + customer).then(printLog);
+}
+
 
 function printSearch(result) {
+    clearInputs();
     result.forEach((data) => {
         console.log(data);
         //Print user name, table data has 3 columns
@@ -112,17 +142,14 @@ function printLog(result) {
 
 }
 
-
+function clearInputs()  {
+    $("input").val("");
+}
 
 //GET Customer String Log
-function viewLogs() {
-    $("#string-tbl").empty();
-    $("#cust-mod").modal('close');
 
-    let customer = $(this).val();
-    console.log(`Customer: ${customer}`)
-    $.get("/api/string/" + customer).then(printLog);
-}
+
+
 
 
 
@@ -155,11 +182,7 @@ function getJob() {
             button: "Close"
         })
     });
-    $("#string").val("")
-    $("#gauge").val("")
-    $("#tension").val("")
-    $("#racquet").val("")
-    $("#comment").val("")
+    clearInputs();
 }
 
 
@@ -228,7 +251,7 @@ $(document).ready(() => {
     //Initialize modals
     $(".modal").modal()
     //Add Customer 
-    $(document).on('click', '#add-cust', addCustomer);
+    $(document).on('click', '#add-cust', getCustVal);
     //Search Customer
     $(document).on('click', '#unique-search', () => {
         $("#cust-mod-tb").empty();
@@ -249,6 +272,7 @@ $(document).ready(() => {
         $("#cust-mod").modal('close');
         $("#search-mod").modal('open');
     })
+    $(document).on('click', "#search-customer", uniqueSearch)
     $(document).on('click', '#job-logs', jobLog)
     $(document).on('click', '.comm-view', function() {
         swal({
@@ -257,7 +281,8 @@ $(document).ready(() => {
         })
     })
     $(document).on('click', '.complete', function() {
-        
+        $.post("/api/message")
+
         $("#queue-mod").modal('close')
         swal({
             icon: 'success',
@@ -265,13 +290,12 @@ $(document).ready(() => {
         })
 
         let jobId = $(this).data("jobId");
-
-        $.ajax({
-            method: "PUT",
-            url: `/api/string/${jobId}`
-        }).then(function()  {
-            $("#job-queue").empty();
-        })
+        // $.ajax({
+        //     method: "PUT",
+        //     url: `/api/string/${jobId}`
+        // }).then(function()  {
+        //     $("#job-queue").empty();
+        // })
     })
 
 })
