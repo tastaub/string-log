@@ -39,4 +39,14 @@ module.exports = (app) =>  {
             console.log(result);
         })
     })
+
+    app.delete('/api/string/delete/:id', function(req,res)  {
+        db.StringLog.destroy({
+            where: {
+                id: req.params.id
+            }
+        }).then((result) =>  {
+            res.json(result);
+        })
+    })
 }
