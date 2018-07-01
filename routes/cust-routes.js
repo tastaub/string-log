@@ -10,12 +10,36 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/api/customers/:last", function(req,res)  {
+  app.get("/api/last/:last", function(req,res)  {
     console.log(req.body);
     db.customers.findAll({
       include: [db.StringLog],
       where: {
         last: req.params.last
+      }
+    }).then((result) =>  {
+      res.json(result);
+    })
+  })
+
+  app.get("/api/id/:id", function(req,res)  {
+    console.log(req.body);
+    db.customers.findAll({
+      include: [db.StringLog],
+      where: {
+        id: req.params.id
+      }
+    }).then((result) =>  {
+      res.json(result);
+    })
+  })
+
+  app.get("/api/phone/:phone", function(req,res)  {
+    console.log(req.body);
+    db.customers.findAll({
+      include: [db.StringLog],
+      where: {
+        phone: req.params.phone
       }
     }).then((result) =>  {
       res.json(result);
@@ -30,14 +54,14 @@ module.exports = function(app) {
     });
   });
 
-//   app.delete("/api/authors/:id", function(req, res) {
-//     db.Author.destroy({
-//       where: {
-//         id: req.params.id
-//       }
-//     }).then(function(dbAuthor) {
-//       res.json(dbAuthor);
-//     });
-//   });
+  app.delete("/api/delete/:id", function(req, res) {
+    db.customers.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(result) {
+      res.json(result);
+    });
+  });
 
 };
