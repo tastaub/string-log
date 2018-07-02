@@ -114,7 +114,7 @@ function printUnqSearch(value) {
 
         let cardContent = $("<div>").addClass('card-content z-depth-3 blue-grey lighten-5')
         let name = $("<span>").text(`${data.first} ${data.last}`).addClass('card-title')
-        let phone = $("<a>").addClass('btn light-blue z-depth-3').text(number).data('phone', data.phone)
+        let phone = $("<a>").addClass('btn light-blue z-depth-3 message-write').text(number).data('phone', data.phone)
         let actions = $("<div>").addClass('card-action light-blue')
 
         let viewLog = $("<a>")
@@ -489,6 +489,39 @@ function getJobVals()  {
     })
 }
 
+function writeMessage()  {
+   let phone = `+1${ $(this).data('phone')}`
+   swal({
+       icon: 'info',
+       title: 'Message',
+       content: {
+           element: 'input',
+           attributes: {
+               placeholder: 'Type a message to send'
+           }
+       }
+    }).then((result) => {
+        if(result.length > 0)  {
+            let message = {
+                phone: phone,
+                message: result
+            }
+            $.post('/api/message/to', message)
+            swal({
+                icon: 'success',
+                title: 'Message Sent'
+            }).then(() =>  {
+                searchInput();
+            })
+        } else  {
+            swal({
+                icon: 'error',
+                text: 'You must enter a message to send'
+            })
+        }
+    })
+}
+
 
 
 
@@ -508,4 +541,5 @@ $(document).ready(function() {
     $(document).on('click', '.add-job', jobInput)
     $(document).on('click', '.get-job', getJobVals)
     $(document).on('click', '.job-again', jobInput)
+    $(document).on('click', '.message-write', writeMessage)
 })
