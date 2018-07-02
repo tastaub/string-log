@@ -7,3 +7,14 @@ img  {
     height: auto;
 }
 
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  footer {
+    flex: 1 0 auto;
+  }
+
+

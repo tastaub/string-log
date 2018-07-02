@@ -18,12 +18,12 @@
 
 <body class="blue-grey lighten-4">
     <nav>
-        <div class="nav-wrapper light-blue">
+        <div class="nav-wrapper light-blue z-depth-2">
             <form>
-                <a href="#!" class="brand-logo">stringr</a>
+                <a href="index.html" class="brand-logo">stringr</a>
                 <ul class="right hide-on-med-and-down">
                     <li>
-                        <a class="pink accent-2 btn modal-trigger" id="op-cust-mod" data-target="cust-mod">queue</a>
+                        <a class="lime accent-3 btn modal-trigger z-depth-5" id="op-cust-mod" data-target="cust-mod"><i class="black-text material-icons">queue</i></a>
                     </li>
                 </ul>
             </form>
@@ -32,44 +32,20 @@
 
 
     <div class="section no-pad-bot" id="index-banner">
-        <div class="container white">
+        <div class="container white z-depth-2">
             <br>
             <br>
-            <div class="center"><img src="images/icon.jpg" class="responsive-img"></div>
-            <h4 class="center">Search Customer.</h4>
-            <div class="row" id="search-bar">
-                <form class="col s12">
-                    <div class="row">
-                        <div class="input-field col s4 m5">
-                            <i class="material-icons prefix">account_circle</i>
-                            <input id="last-search" type="text" list="data-last">
-                            <label for="last-search">Last Name</label>
-                            <datalist id="data-last"></datalist>
-                        </div>
-                        <div class="input-field col s4 m5">
-                            <i class="material-icons prefix">phone</i>
-                            <input id="phone-search" type="tel" list="data-phone">
-                            <label for="phone-search">Telephone</label>
-                            <datalist id="data-phone"></datalist>
-                        </div>
-                        <br>
-                        <div class="col s1">
-                            <a class="btn light-blue" id="search-customer"><i class="material-icons">search</i></a>
-                        </div>
-                        <div class="col s1">
-                            <a class="btn light-blue" id="search-all"><i class="material-icons">select_all</i></a>
-                        </div>
-                        
-                    </div>
-                </form>
-            </div>
-            <div class="row" id="content-container">
-
-            </div>
+            <div class="center"><a href="index.html"><img src="images/icon.jpg" class="responsive-img"></a></div>
+            <h4 class="center" id="title-header"></h4>
+            <div class="row" id="content-container"></div>
         </div>
     </div>
 
-    <!-- Add Customer Modal -->
+    <footer class="page-footer lime accent-3">
+        <div class="container">
+          <div class="row"></div>
+        </div>
+      </footer>
 
 
     <script src="materialize/js/materialize.js"></script>
