@@ -12,16 +12,22 @@
     height: auto;
 }
 
-
-
-body {
+ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
   }
-
-  footer {
+ 
+ main {
     flex: 1 0 auto;
   }
+ footer{
+    background: linear-gradient(gray,#c6ff00);
+ }
 
-
+ #grad {
+    background: linear-gradient(#03a9f4, white);
+ }
+ #grad2 {
+    background: linear-gradient(white, grey);
+ }

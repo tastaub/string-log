@@ -386,7 +386,7 @@ function searchInput() {
     $("#title-header").empty();
     $("#title-header").text("Search Customer");
 
-    let form = $("<form>").addClass('col s12 center')
+    let form = $("<form>").addClass('col s12 center blue-grey lighten-5  z-depth-3')
     let row = $("<div>").addClass('row')
     let lastField = $('<div>').addClass('input-field col s12 m4')
     let lastIcon = $("<i>").addClass('material-icons prefix').text('account_circle');
