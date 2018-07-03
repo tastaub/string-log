@@ -480,13 +480,25 @@ function getJobVals() {
         customerId: $(this).data('customer-id')
     }
 
-    swal({
-        icon: 'success',
-        title: 'Job Created',
-        text: `${newJob.racquet}, ${newJob.string} ${newJob.gauge}, ${newJob.tension}lbs`
-    }).then(function() {
-        jobCreate(newJob);
-    })
+    if(newJob.string.length && newJob.gauge.length && newJob.tension.length && newJob.racquet.length > 0)  {
+        swal({
+            icon: 'success',
+            title: 'Job Created',
+            text: `${newJob.racquet}, ${newJob.string} ${newJob.gauge}, ${newJob.tension}lbs`
+        }).then(function() {
+            jobCreate(newJob);
+        })
+    } else  {
+        swal({
+            icon: 'warning',
+            titel: 'Missing Input',
+            text: 'You did not enter all the required fields'
+        }).then(() =>  {
+            clearInputs();
+        })
+    }
+
+
 }
 
 function writeMessage() {
