@@ -280,7 +280,7 @@ function printLogs(value, customer) {
         let btnGroup = $("<div>").append(reuse, deleteJob)
 
         if (data.comment != null) {
-            if(data.comment.legnth != 0)  {
+            if (data.comment.legnth != 0) {
                 let commentBtn = $('<a>').addClass('lime accent-2 btn view-comment z-depth-5').data('comment', data.comment)
                 let commentIcon = $("<i>").addClass('material-icons black-text').text('message')
                 commentBtn.append(commentIcon)
@@ -381,47 +381,47 @@ function viewComment() {
     })
 }
 
-function searchInput()  {
+function searchInput() {
     $("#content-container").empty();
     $("#title-header").empty();
     $("#title-header").text("Search Customer");
 
     let form = $("<form>").addClass('col s12 center')
-        let row = $("<div>").addClass('row')
-            let lastField = $('<div>').addClass('input-field col s12 m4')
-                let lastIcon = $("<i>").addClass('material-icons prefix').text('account_circle');
-                let lastInput = $("<input>").attr('id', 'last-search').attr('type', 'text').attr('list', 'data-last');
-                let lastLabel = $("<label>").attr('for', 'last-search').text('Last Name');
-                let lastData = $("<datalist>").attr('id', 'data-last');
-            lastField.append(lastIcon,lastInput,lastLabel,lastData);
+    let row = $("<div>").addClass('row')
+    let lastField = $('<div>').addClass('input-field col s12 m4')
+    let lastIcon = $("<i>").addClass('material-icons prefix').text('account_circle');
+    let lastInput = $("<input>").attr('id', 'last-search').attr('type', 'text').attr('list', 'data-last');
+    let lastLabel = $("<label>").attr('for', 'last-search').text('Last Name');
+    let lastData = $("<datalist>").attr('id', 'data-last');
+    lastField.append(lastIcon, lastInput, lastLabel, lastData);
 
-            let phoneField = $('<div>').addClass('input-field col s12 m4')
-                let phoneIcon = $("<i>").addClass('material-icons prefix').text('phone');
-                let phoneInput = $("<input>").attr('id', 'phone-search').attr('type', 'text').attr('list', 'data-phone');
-                let phoneLabel = $("<label>").attr('for', 'phone-search').text('Telephone (10 Digits)');
-                let phoneData = $("<datalist>").attr('id', 'data-phone');
-            phoneField.append(phoneIcon,phoneInput,phoneLabel,phoneData);
+    let phoneField = $('<div>').addClass('input-field col s12 m4')
+    let phoneIcon = $("<i>").addClass('material-icons prefix').text('phone');
+    let phoneInput = $("<input>").attr('id', 'phone-search').attr('type', 'text').attr('list', 'data-phone');
+    let phoneLabel = $("<label>").attr('for', 'phone-search').text('Telephone (10 Digits)');
+    let phoneData = $("<datalist>").attr('id', 'data-phone');
+    phoneField.append(phoneIcon, phoneInput, phoneLabel, phoneData);
 
-            let buttonGroup = $("<div>").addClass('col s12 m4');
-                let search = $("<a>").addClass('btn light-blue z-depth-3').attr('id', 'search-customer');
-                    let searchIcon = $("<i>").addClass('material-icons').text('search')
-                search.append(searchIcon);
-                let select = $("<a>").addClass('btn light-blue z-depth-3').attr('id', 'search-all');
-                    let selectIcon = $("<i>").addClass('material-icons').text('select_all')
-                select.append(selectIcon);
-                let addNew = $("<a>").addClass('btn light-blue z-depth-3').attr('id', 'add-new');
-                    let addNewIcon = $("<i>").addClass('material-icons').text('add')
-                addNew.append(addNewIcon);
-            buttonGroup.append(search,select,addNew);
+    let buttonGroup = $("<div>").addClass('col s12 m4');
+    let search = $("<a>").addClass('btn light-blue z-depth-3').attr('id', 'search-customer');
+    let searchIcon = $("<i>").addClass('material-icons').text('search')
+    search.append(searchIcon);
+    let select = $("<a>").addClass('btn light-blue z-depth-3').attr('id', 'search-all');
+    let selectIcon = $("<i>").addClass('material-icons').text('select_all')
+    select.append(selectIcon);
+    let addNew = $("<a>").addClass('btn light-blue z-depth-3').attr('id', 'add-new');
+    let addNewIcon = $("<i>").addClass('material-icons').text('add')
+    addNew.append(addNewIcon);
+    buttonGroup.append(search, select, addNew);
 
-            row.append(lastField,phoneField,$("<br>"),buttonGroup);
-            form.append(row);
+    row.append(lastField, phoneField, $("<br>"), buttonGroup);
+    form.append(row);
 
-            $('#content-container').append(form);
+    $('#content-container').append(form);
 }
 
-function jobInput()  {
-    
+function jobInput() {
+
     $("#title-header").empty();
     $("#title-header").text(`Add a new job for ${$(this).data('customer')}`)
     $("#content-container").empty();
@@ -430,46 +430,46 @@ function jobInput()  {
     let row = $("<div>").addClass('row')
 
     let stringField = $('<div>').addClass('input-field col s12 m6')
-        let stringIcon = $("<i>").addClass('material-icons prefix').text('gesture');
-        let stringInput = $("<input>").attr('id', 'string-search').attr('type', 'text')
-        let stringLabel = $("<label>").attr('for', 'string-search').text('String');
-    stringField.append(stringIcon,stringInput,stringLabel)
+    let stringIcon = $("<i>").addClass('material-icons prefix').text('gesture');
+    let stringInput = $("<input>").attr('id', 'string-search').attr('type', 'text')
+    let stringLabel = $("<label>").attr('for', 'string-search').text('String');
+    stringField.append(stringIcon, stringInput, stringLabel)
 
     let gaugeField = $('<div>').addClass('input-field col s6 m6')
-        let gaugeIcon = $("<i>").addClass('material-icons prefix').text('gesture');
-        let gaugeInput = $("<input>").attr('id', 'gauge-search').attr('type', 'text')
-        let gaugeLabel = $("<label>").attr('for', 'gauge-search').text('Gauge');
-    gaugeField.append(gaugeIcon,gaugeInput,gaugeLabel)
+    let gaugeIcon = $("<i>").addClass('material-icons prefix').text('gesture');
+    let gaugeInput = $("<input>").attr('id', 'gauge-search').attr('type', 'text')
+    let gaugeLabel = $("<label>").attr('for', 'gauge-search').text('Gauge');
+    gaugeField.append(gaugeIcon, gaugeInput, gaugeLabel)
 
     let tensionField = $('<div>').addClass('input-field col s6 m6')
-        let tensionIcon = $("<i>").addClass('material-icons prefix').text('gesture');
-        let tensionInput = $("<input>").attr('id', 'tension-search').attr('type', 'text')
-        let tensionLabel = $("<label>").attr('for', 'tension-search').text('Tension');
-    tensionField.append(tensionIcon,tensionInput,tensionLabel)
+    let tensionIcon = $("<i>").addClass('material-icons prefix').text('gesture');
+    let tensionInput = $("<input>").attr('id', 'tension-search').attr('type', 'text')
+    let tensionLabel = $("<label>").attr('for', 'tension-search').text('Tension');
+    tensionField.append(tensionIcon, tensionInput, tensionLabel)
 
     let racquetField = $('<div>').addClass('input-field col s12 m6')
-        let racquetIcon = $("<i>").addClass('material-icons prefix').text('gesture');
-        let racquetInput = $("<input>").attr('id', 'racquet-search').attr('type', 'text')
-        let racquetLabel = $("<label>").attr('for', 'racquet-search').text('Racquet');
-    racquetField.append(racquetIcon,racquetInput,racquetLabel)
+    let racquetIcon = $("<i>").addClass('material-icons prefix').text('gesture');
+    let racquetInput = $("<input>").attr('id', 'racquet-search').attr('type', 'text')
+    let racquetLabel = $("<label>").attr('for', 'racquet-search').text('Racquet');
+    racquetField.append(racquetIcon, racquetInput, racquetLabel)
 
     let commentField = $('<div>').addClass('input-field col s12')
-        let commentInput = $("<textarea>").attr('id', 'comment-search').addClass('materialize-textarea')
-        let commentLabel = $("<label>").attr('for', 'comment-search').text('Comments');
-    commentField.append(commentInput,commentLabel)
+    let commentInput = $("<textarea>").attr('id', 'comment-search').addClass('materialize-textarea')
+    let commentLabel = $("<label>").attr('for', 'comment-search').text('Comments');
+    commentField.append(commentInput, commentLabel)
 
     let buttonDiv = $('<div>').addClass('col s4 m3')
-        let button = $('<a>').addClass('btn light-blue z-depth-3 get-job').data('customer-id', $(this).val())
-            .text("Add String Job")
+    let button = $('<a>').addClass('btn light-blue z-depth-3 get-job').data('customer-id', $(this).val())
+        .text("Add String Job")
     buttonDiv.append(button);
 
 
-    row.append(stringField,gaugeField,tensionField,racquetField,commentField, buttonDiv);
+    row.append(stringField, gaugeField, tensionField, racquetField, commentField, buttonDiv);
     form.append(row);
     $("#content-container").append(form);
 }
 
-function getJobVals()  {
+function getJobVals() {
 
     let newJob = {
         string: $("#string-search").val(),
@@ -484,24 +484,24 @@ function getJobVals()  {
         icon: 'success',
         title: 'Job Created',
         text: `${newJob.racquet}, ${newJob.string} ${newJob.gauge}, ${newJob.tension}lbs`
-    }).then(function()  {
+    }).then(function() {
         jobCreate(newJob);
     })
 }
 
-function writeMessage()  {
-   let phone = `+1${ $(this).data('phone')}`
-   swal({
-       icon: 'info',
-       title: 'Message',
-       content: {
-           element: 'input',
-           attributes: {
-               placeholder: 'Type a message to send'
-           }
-       }
+function writeMessage() {
+    let phone = `+1${ $(this).data('phone')}`
+    swal({
+        icon: 'info',
+        title: 'Message',
+        content: {
+            element: 'input',
+            attributes: {
+                placeholder: 'Type a message to send'
+            }
+        }
     }).then((result) => {
-        if(result.length > 0)  {
+        if (result.length > 0) {
             let message = {
                 phone: phone,
                 message: result
@@ -510,10 +510,10 @@ function writeMessage()  {
             swal({
                 icon: 'success',
                 title: 'Message Sent'
-            }).then(() =>  {
+            }).then(() => {
                 searchInput();
             })
-        } else  {
+        } else {
             swal({
                 icon: 'error',
                 text: 'You must enter a message to send'
@@ -522,18 +522,17 @@ function writeMessage()  {
     })
 }
 
-function checkQueue()  {
-}
+function checkQueue() {}
 
-function viewQueue()  {
+function viewQueue() {
     $.get("/api/string").then((result) => {
-        if(result.length > 0)  {    
+        if (result.length > 0) {
             $(".sidenav").sidenav('close');
             $("#title-header").empty();
             $('#title-header').text(`${result.length} String Jobs in Queue`)
             $("#content-container").empty();
 
-            result.forEach((data) =>  {
+            result.forEach((data) => {
                 let col = $("<div>").addClass('col s12 m6')
                 let card = $("<div>").addClass('card blue-grey lighten-5')
                 let content = $("<div>").addClass('card-content')
@@ -541,7 +540,7 @@ function viewQueue()  {
                 let customer = $("<span>").text(`${c.first} ${c.last}`).addClass('card-title')
                 let racquet = $("<h4>").text(data.racquet)
                 let info = $("<p>").text(`${data.string} ${data.gauge}: ${data.tension}lbs`)
-                
+
                 let btnGroup = $('<div>').addClass('card-action light-blue')
                 let phone = $("<a>").text('Send Confirmation').addClass('black-text z-depth-3 btn lime accent-3 conf-send')
                     .data('phone', `+1${c.phone}`)
@@ -551,48 +550,43 @@ function viewQueue()  {
                     .data('jobId', data.id)
                 let completeIcon = $("<i>").addClass('material-icons right').text('check_box')
                 complete.append(completeIcon)
-                btnGroup.append(phone,complete)
-                content.append(racquet,info,customer)
-                card.append(content,btnGroup)
+                btnGroup.append(phone, complete)
+                content.append(racquet, info, customer)
+                card.append(content, btnGroup)
                 col.append(card)
                 $("#content-container").append(col)
             })
-        } else  {
+        } else {
             swal({
                 icon: 'success',
                 text: 'All jobs are completed.'
-            }).then(() =>  {
+            }).then(() => {
                 location.reload();
             })
         }
     })
-    
+
 }
 
-function sendDone()  {
+function sendDone() {
     let phone = $(this).data('phone')
 
     $.post(`/api/message/${phone}`)
-        swal({
-            icon: 'info',
-            title: 'Job Done',
-            text: 'Remove job from queue and start on the next one.'
-        })
+    swal({
+        icon: 'info',
+        title: 'Job Done',
+        text: 'Remove job from queue and start on the next one.'
+    })
 }
 
-function updateQueue()  {
+function updateQueue() {
     let id = $(this).data('jobId')
     $.ajax({
         method: "PUT",
         url: `/api/string/${id}`
-    }).then(function(result)  {
+    }).then(function(result) {
         viewQueue();
     })
-
-    // swal({
-    //     icon: 'success',
-    //     text: 'This job is complete'
-    // })
 }
 
 
