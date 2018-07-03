@@ -490,7 +490,8 @@ function getJobVals() {
 }
 
 function writeMessage() {
-    let phone = `+1${ $(this).data('phone')}`
+    let phone = $(this).data('phone')
+    console.log(phone)
     swal({
         icon: 'info',
         title: 'Message',
@@ -503,16 +504,11 @@ function writeMessage() {
     }).then((result) => {
         if (result.length > 0) {
             let message = {
-                phone: phone,
+                phone: `+1${phone}`,
                 message: result
             }
-            $.post('/api/message/to', message)
-            swal({
-                icon: 'success',
-                title: 'Message Sent'
-            }).then(() => {
-                searchInput();
-            })
+            messagePost(message)
+           
         } else {
             swal({
                 icon: 'error',
@@ -522,7 +518,23 @@ function writeMessage() {
     })
 }
 
-function checkQueue() {}
+function messagePost(message)  {
+    
+    console.log(message)
+    $.post("/api/message/to", message, function(result)  {
+        console.log(result);
+    })
+    
+    // $.post('/api/message/to', message).then((response) =>  {
+    //     console.log(response)
+    // })
+    // swal({
+    //     icon: 'success',
+    //     title: 'Message Sent'
+    // }).then(() => {
+    //     searchInput();
+    // })
+}
 
 function viewQueue() {
     $.get("/api/string").then((result) => {
