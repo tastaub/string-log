@@ -2,10 +2,17 @@
     display: none;
 }
 
-img  {
+#logo  {
     width: 400px;
     height: auto;
 }
+
+#iconLogo  {
+    width: 80px;
+    height: auto;
+}
+
+
 
 body {
     display: flex;

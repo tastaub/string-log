@@ -403,13 +403,13 @@ function searchInput() {
     phoneField.append(phoneIcon, phoneInput, phoneLabel, phoneData);
 
     let buttonGroup = $("<div>").addClass('col s12 m4');
-    let search = $("<a>").addClass('btn light-blue z-depth-3').attr('id', 'search-customer');
+    let search = $("<a>").addClass('btn light-blue z-depth-3').attr('id', 'search-customer').attr('title','Search Customer');
     let searchIcon = $("<i>").addClass('material-icons').text('search')
     search.append(searchIcon);
-    let select = $("<a>").addClass('btn light-blue z-depth-3').attr('id', 'search-all');
+    let select = $("<a>").addClass('btn light-blue z-depth-3').attr('id', 'search-all').attr('title', 'Select All Customers');
     let selectIcon = $("<i>").addClass('material-icons').text('select_all')
     select.append(selectIcon);
-    let addNew = $("<a>").addClass('btn light-blue z-depth-3').attr('id', 'add-new');
+    let addNew = $("<a>").addClass('btn light-blue z-depth-3').attr('id', 'add-new').attr('title', 'Add New Customer');
     let addNewIcon = $("<i>").addClass('material-icons').text('add')
     addNew.append(addNewIcon);
     buttonGroup.append(search, select, addNew);
@@ -521,19 +521,9 @@ function writeMessage() {
 function messagePost(message)  {
     
     console.log(message)
-    $.post("/api/message/to", message, function(result)  {
+    $.post(`/api/message/${message.phone}/${message.message}`).then(function(result)  {
         console.log(result);
     })
-    
-    // $.post('/api/message/to', message).then((response) =>  {
-    //     console.log(response)
-    // })
-    // swal({
-    //     icon: 'success',
-    //     title: 'Message Sent'
-    // }).then(() => {
-    //     searchInput();
-    // })
 }
 
 function viewQueue() {

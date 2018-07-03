@@ -13,12 +13,11 @@ var client = require('twilio')(
           }).then((message) => res.json(message.id));
       })
 
-      app.post('/api/message/to', function(req,res)  {
-        console.log(req.body);  
+      app.post('/api/message/:phone/:message', function(req,res)  {
         client.messages.create({
               from: "+19808888448",
-              to: req.body.phone,
-              body: req.body.message
+              to: req.params.phone,
+              body: req.params.message
           }).then((result) =>  {
               res.json(result.id)
               console.log(result);
