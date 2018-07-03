@@ -522,11 +522,82 @@ function writeMessage()  {
     })
 }
 
+function checkQueue()  {
+}
 
+function viewQueue()  {
+    $.get("/api/string").then((result) => {
+        if(result.length > 0)  {    
+            $(".sidenav").sidenav('close');
+            $("#title-header").empty();
+            $('#title-header').text(`${result.length} String Jobs in Queue`)
+            $("#content-container").empty();
 
+            result.forEach((data) =>  {
+                let col = $("<div>").addClass('col s12 m6')
+                let card = $("<div>").addClass('card blue-grey lighten-5')
+                let content = $("<div>").addClass('card-content')
+                let c = data.customer
+                let customer = $("<span>").text(`${c.first} ${c.last}`).addClass('card-title')
+                let racquet = $("<h4>").text(data.racquet)
+                let info = $("<p>").text(`${data.string} ${data.gauge}: ${data.tension}lbs`)
+                
+                let btnGroup = $('<div>').addClass('card-action light-blue')
+                let phone = $("<a>").text('Send Confirmation').addClass('black-text z-depth-3 btn lime accent-3 conf-send')
+                    .data('phone', `+1${c.phone}`)
+                let phoneIcon = $("<i>").addClass('material-icons right').text('send')
+                phone.append(phoneIcon)
+                let complete = $("<a>").addClass('black-text z-depth-3 btn pink accent-2 job-done').text('Job Completed')
+                    .data('jobId', data.id)
+                let completeIcon = $("<i>").addClass('material-icons right').text('check_box')
+                complete.append(completeIcon)
+                btnGroup.append(phone,complete)
+                content.append(racquet,info,customer)
+                card.append(content,btnGroup)
+                col.append(card)
+                $("#content-container").append(col)
+            })
+        } else  {
+            swal({
+                icon: 'success',
+                text: 'All jobs are completed.'
+            }).then(() =>  {
+                location.reload();
+            })
+        }
+    })
+    
+}
+
+function sendDone()  {
+    let phone = $(this).data('phone')
+
+    $.post(`/api/message/${phone}`)
+        swal({
+            icon: 'info',
+            title: 'Job Done',
+            text: 'Remove job from queue and start on the next one.'
+        })
+}
+
+function updateQueue()  {
+    let id = $(this).data('jobId')
+    $.ajax({
+        method: "PUT",
+        url: `/api/string/${id}`
+    }).then(function(result)  {
+        viewQueue();
+    })
+
+    // swal({
+    //     icon: 'success',
+    //     text: 'This job is complete'
+    // })
+}
 
 
 $(document).ready(function() {
+    $('.sidenav').sidenav();
     setAuto();
     searchInput();
     $(document).on('click', "#search-customer", getSearchVal);
@@ -542,4 +613,7 @@ $(document).ready(function() {
     $(document).on('click', '.get-job', getJobVals)
     $(document).on('click', '.job-again', jobInput)
     $(document).on('click', '.message-write', writeMessage)
+    $(document).on('click', '.view-queue', viewQueue)
+    $(document).on('click', '.job-done', updateQueue)
+    $(document).on('click', '.conf-send', sendDone)
 })

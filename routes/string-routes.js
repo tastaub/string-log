@@ -36,7 +36,7 @@ module.exports = (app) =>  {
 
     app.put("/api/string/:id", function(req,res)  {
         db.StringLog.update({isDone: true}, {where: {id: req.params.id}}).then((result) =>  {
-            console.log(result);
+            res.json(result);
         })
     })
 
