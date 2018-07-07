@@ -612,7 +612,7 @@ function updateQueue() {
         swal({
             icon: 'info',
             title: 'Job Done',
-            text: 'Remove job from queue and start on the next one.',
+            text: 'Send message to customer or close to move on.',
             buttons: {
                 cancel: 'Close',
                 catch: 'Send Status'
