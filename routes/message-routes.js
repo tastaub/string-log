@@ -1,8 +1,5 @@
 
-var client = require('twilio')(
-    "AC167bc81780158976408a371fce961ec4",
-    "5586cdbb89875d41f6eac322181af125"
-  );
+var client = require('twilio')(process.env.TWIL_KEY, process.env.TWIL_TOKEN);
 
   module.exports = function(app)  {
       app.post("/api/message/:phone", function(req,res)  {

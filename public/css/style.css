@@ -21,13 +21,39 @@
  main {
     flex: 1 0 auto;
   }
- footer{
-    background: linear-gradient(gray,#c6ff00);
+ .footer-copyright  {
+    background: linear-gradient(#c6ff00,#eceff1);
+    display: table;
+ }
+ footer  {
+     text-align: center;
  }
 
+
+
+
  #grad {
-    background: linear-gradient(#03a9f4, white);
+    background: linear-gradient(#03a9f4,#eceff1);
  }
  #grad2 {
-    background: linear-gradient(white, grey);
+    background: linear-gradient(#78909c, #eceff1);
  }
+
+ #grad3  {
+     background: linear-gradient(#ff4081,#eceff1);
+ }
+
+ #grad4  {
+    background: linear-gradient(#c6ff00,#eceff1);
+ }
+
+ i.material-icons.prefix.active {
+     color: #c6ff00;
+ }
+
+ label.active {
+     display: none;
+ }
+
+
+
