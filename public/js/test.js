@@ -408,14 +408,16 @@ function searchInput() {
     let search = $("<a>").addClass('btn lime accent-3 z-depth-3 black-text').attr('id', 'search-customer').attr('title','Search Customer').text("search customer");
     let searchIcon = $("<i>").addClass('material-icons black-text right').text('search')
     search.append(searchIcon);
-    let select = $("<a>").addClass('btn lime accent-3 z-depth-3 black-text').text("Select All Customers").attr('id', 'search-all').attr('title', 'Select All Customers');
+    
+    let select = $("<a>").addClass('btn lime accent-3 z-depth-3 black-text col s12 m6 z-depth-3').text("Select All Customers").attr('id', 'search-all').attr('title', 'Select All Customers');
     let selectIcon = $("<i>").addClass('material-icons black-text right').text('select_all')
     select.append(selectIcon);
     
-    let addNew = $("<a>").addClass('btn lime accent-3 z-depth-3 black-text').attr('id', 'add-new').attr('title', 'Add New Customer').text("Add New Customer");
+    let addNew = $("<a>").addClass('btn lime accent-3 z-depth-3 black-text col s12 m6 z-depth-3').attr('id', 'add-new').attr('title', 'Add New Customer').text("Add New Customer");
     let addNewIcon = $("<i>").addClass('material-icons black-text right').text('add')
     addNew.append(addNewIcon);
-    $("#title-header").append("<br>",select,"<br>", addNew);
+    let headBtn = $("<div>").addClass('row center').append(select,addNew)
+    $("#title-header").append(headBtn);
     buttonGroup.append(search);
 
     row.append(lastField, phoneField, $("<br>"), buttonGroup);
