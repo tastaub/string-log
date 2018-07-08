@@ -2,8 +2,8 @@
 
 ## A Stringers Companion App
 
-**A MYSQL string log database using an express and node server.**
-**Mobile first design**
+* **A MYSQL string log database using an express and node server.**
+* Try it out here [Stringr](https://floating-gorge-67629.herokuapp.com/index.html)
 
 ### Search Customers and Add Customers
 ![Search Customers](/gifs/search.png)
