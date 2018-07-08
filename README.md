@@ -19,8 +19,27 @@
 * Add string job displays create job input
     * Input validation requires valid phone, 
 
-###Customer Logs
+### Customer Logs
+* User Actions
+    * Reuse string job allows to create a new job with the same specs as a previous entry
+    * If comment exist message icon appears and modal popup displays message
+    * Delete entry from db with confirm prompt
+    * Able to create job from this page as well
 
-###Active Queue
+### Active Queue
+* Displays all active string jobs with job description and customer info
+* Mark complete updates the job in the db table to complete and removes from queue
+    * Prompt to message appears, if confirm then text sent to customer alerting job completion 
 
-###Customer Messaging 
+## Node Dependencies 
+* Twilo *Messaging*
+* Express *Routing*
+* Node *Server*
+* Sequelize *DB Middleware*
+* MYSQL *Database*
+
+## Authors
+* Jason Flick **Server Design and Testing**
+* Michael Lee **U/I Design and Brand Designer**
+* Thomas Staub **U/I and Server Scripting**
+* Thomas Story **U/I Design and Server Authentication**
